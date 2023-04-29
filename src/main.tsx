@@ -7,6 +7,10 @@ import Home from "./routes/Home";
 import Register from "./routes/Register";
 import Login from "./routes/Login.tsx";
 import Page404 from "./routes/Page404.tsx";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.min.css";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,5 +36,17 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    <ToastContainer
+      position="top-center"
+      autoClose={5000}
+      hideProgressBar
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
   </React.StrictMode>
 );

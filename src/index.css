@@ -20,8 +20,10 @@
   box-sizing: border-box;
 }
 body {
-  min-width: 100vw;
-  min-height: 100vh;
+  /* width: 100vw; */
+  max-width: 100vw;
+  /* overflow-x: hidden; */
+  /* height: 100vh; */
 }
 @tailwind base;
 @tailwind components;
@@ -31,4 +33,15 @@ body {
   .container-height {
     @apply container min-h-[70vh] p-8;
   }
+
+  .boxShadowOrange {
+    /* box-shadow: 0 15px 25px #f6982de6 */
+    @apply shadow-lg shadow-[rgba(246,152,45,0.7)];
+  }
+  .btn {
+    @apply w-full max-w-[180px] h-10 font-medium text-lg  bg-primary-color duration-500 rounded text-zinc-950 hover:bg-zinc-950 hover:text-primary-color hover:-translate-y-1 hover:shadow-md hover:shadow-zinc-950;
+  }
+  /*  .boxShadowOrange {
+    box-shadow: 0 15px 25px rgba(246, 152, 45, 0.9);
+  } */
 }
