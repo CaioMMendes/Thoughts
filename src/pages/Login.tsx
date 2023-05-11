@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
-
+import { toastSucess, toastError } from "../components/ToastMessage";
+import { AuthApi } from "../hooks/AuthApi";
+import { userLogadoContext } from "../contexts/UserContext";
 const Login = () => {
+  const api = AuthApi();
+  const { userLogado, setUserLogado } = useContext(userLogadoContext);
   const [showPassword, setShowPassword] = useState(false);
+
   const createUserFormSchema = z.object({
     email: z
       .string()
@@ -16,9 +21,14 @@ const Login = () => {
 
     password: z
       .string()
+
       .nonempty("Digite uma senha")
       .refine((password) => {
-        return !password.includes(" ");
+        // return !password.includes(" ");
+        if (/\p{Emoji}/gu.test(password) || password.includes(" ")) {
+          return false;
+        }
+        return password;
       }, "Formato de senha inválido"),
   });
   const {
@@ -29,8 +39,25 @@ const Login = () => {
   } = useForm<CreateUserFormData>({
     resolver: zodResolver(createUserFormSchema),
   });
-  const createUser = (data: any) => {
-    console.log(data);
+  const loginUser = async (data: any) => {
+    try {
+      console.log(data);
+      await api
+        .login(data.email, data.password)
+        .then((response) => {
+          if (response.data?.error) {
+            return toastError(`${response.data.error}`);
+          }
+
+          setUserLogado(response.data);
+          toastSucess("Logado com sucesso");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
   type CreateUserFormData = z.infer<typeof createUserFormSchema>;
   const handdleShowPassword = () => {
@@ -39,7 +66,7 @@ const Login = () => {
   console.log("renderizou");
   return (
     <main className="flex justify-center items-center pt-4 pb-8  ">
-      <form onSubmit={handleSubmit(createUser)} className="">
+      <form onSubmit={handleSubmit(loginUser)} className="">
         <div className="w-[400px] boxShadowOrange p-7 flex flex-col gap-5">
           <h1 className="text-4xl pl-2 border-l-[5px] font-medium border-l-primary-color">
             Login

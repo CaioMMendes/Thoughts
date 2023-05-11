@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { userLogadoContext } from "../contexts/UserContext";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { AuthApi } from "../hooks/AuthApi";
 
 const Register = () => {
+  const { userLogado, setUserLogado } = useContext(userLogadoContext);
+
   const api = AuthApi();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -17,8 +20,14 @@ const Register = () => {
     .object({
       name: z
         .string()
+        // .regex(/[^A-Za-zÀ-ú\s]/gu, "Formato inválido")
+        //quando o regex é falso ele passa a mensagem
         .nonempty("O nome é obrigatório")
         .toLowerCase()
+        .regex(
+          /[\u1F600-\u1F64F\u2700-\u27BF]/gu,
+          "O nome não deve conter caracteres especiais"
+        )
         .refine((name) => {
           const regex = /[^A-Za-zÀ-ú\s]/;
           return !regex.test(name);
@@ -29,7 +38,6 @@ const Register = () => {
             .split(" ")
             .filter(Boolean)
             .map((word) => {
-              console.log(word);
               return word[0].toLocaleUpperCase().concat(word.substring(1));
             })
             .join(" ");
@@ -42,19 +50,32 @@ const Register = () => {
 
       password: z
         .string()
+        // .regex(
+        //   /^(\+\d{1,3})?[-.\s]?\(?\d{2,}\)?[-.\s]?\d{4,}[-.\s]?\d{4}$/,
+        //   "dasdasd"
+        // )
         .nonempty("Digite uma senha de pelo menos 8 dígitos")
-        .min(8, "A senha precisa ter 8 dígitos")
+        // .min(8, "A senha precisa ter 8 dígitos")
         .max(32, "A senha deve ter menos de 32 dígitos")
         .refine((password) => {
           return !password.includes(" ");
+          if (/\p{Emoji}/gu.test(password) || password.includes(" ")) {
+            return false;
+          }
+          return password;
         }, "Formato de senha inválido"),
       passwordConfirm: z
         .string()
         .nonempty("Digite uma senha de pelo menos 8 dígitos")
-        .min(8, "A senha precisa ter 8 dígitos")
+        // .min(8, "A senha precisa ter 8 dígitos")
         .max(32, "A senha deve ter menos de 32 dígitos")
         .refine((passwordConfirm) => {
-          return !passwordConfirm.includes(" ");
+          //todo fazer isso aqui
+          // const regex = /^[A-Za-z\d@$!%*#?&]$/gu;
+          // if (regex.test(passwordConfirm) || passwordConfirm.includes(" ")) {
+          //   return false;
+          // }
+          return passwordConfirm;
         }, "Formato de senha inválido"),
     })
     .superRefine(({ password, passwordConfirm }, ctx) => {
@@ -81,15 +102,14 @@ const Register = () => {
   });
   const createUser = async (data: any) => {
     try {
+      console.log(data);
       await api
         .register(data.name, data.email, data.password)
         .then((response) => {
           if (response.data?.error) {
-            console.log(response.data);
             return toastError(`${response.data.error}`);
           }
           navigate("/login");
-          console.log(data);
           toastSucess("Cadastrado com sucesso");
         })
         .catch((err) => {
@@ -106,7 +126,7 @@ const Register = () => {
   const handdleShowConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
-  console.log("renderizou");
+  console.log(userLogado);
   return (
     <main className="flex justify-center items-center pt-4 pb-8 ">
       <form onSubmit={handleSubmit(createUser)} className="">

@@ -3,11 +3,13 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./routes/Home";
-import Register from "./routes/Register";
-import Login from "./routes/Login.tsx";
-import Page404 from "./routes/Page404.tsx";
+import Home from "./pages/Home.tsx";
+import Register from "./pages/Register.tsx";
+import Login from "./pages/Login.tsx";
+import Dashboard from "./pages/Dashboard.tsx";
+import Page404 from "./pages/Page404.tsx";
 import { ToastContainer } from "react-toastify";
+import { UserLogadoProvider } from "./contexts/UserContext.tsx";
 
 import "react-toastify/dist/ReactToastify.min.css";
 
@@ -29,24 +31,30 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-    <ToastContainer
-      position="top-center"
-      autoClose={5000}
-      hideProgressBar
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="light"
-    />
+    <UserLogadoProvider>
+      <RouterProvider router={router} />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    </UserLogadoProvider>
   </React.StrictMode>
 );
