@@ -9,7 +9,7 @@ import { AuthApi } from "../hooks/AuthApi";
 import { userLogadoContext } from "../contexts/UserContext";
 const Login = () => {
   const api = AuthApi();
-  const { userLogado, setUserLogado } = useContext(userLogadoContext);
+  const { setUserLogado } = useContext(userLogadoContext);
   const [showPassword, setShowPassword] = useState(false);
 
   const createUserFormSchema = z.object({
@@ -22,14 +22,14 @@ const Login = () => {
     password: z
       .string()
 
-      .nonempty("Digite uma senha")
-      .refine((password) => {
-        // return !password.includes(" ");
-        if (/\p{Emoji}/gu.test(password) || password.includes(" ")) {
-          return false;
-        }
-        return password;
-      }, "Formato de senha inválido"),
+      .nonempty("Digite uma senha"),
+    // .refine((password) => {
+    //   // return !password.includes(" ");
+    //   if (/\p{Emoji}/gu.test(password) || password.includes(" ")) {
+    //     return false;
+    //   }
+    //   return password;
+    // }, "Formato de senha inválido"),
   });
   const {
     register,
@@ -41,7 +41,6 @@ const Login = () => {
   });
   const loginUser = async (data: any) => {
     try {
-      console.log(data);
       await api
         .login(data.email, data.password)
         .then((response) => {
@@ -63,7 +62,7 @@ const Login = () => {
   const handdleShowPassword = () => {
     setShowPassword(!showPassword);
   };
-  console.log("renderizou");
+
   return (
     <main className="flex justify-center items-center pt-4 pb-8  ">
       <form onSubmit={handleSubmit(loginUser)} className="">

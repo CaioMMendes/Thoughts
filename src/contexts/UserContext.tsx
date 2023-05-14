@@ -8,20 +8,27 @@ import {
 
 interface IUserLogado {
   userLogado: {
-    id: number;
-    name: string;
-    email: string;
-  } | null;
-  setUserLogado: Dispatch<SetStateAction<UserLogado | null>>;
+    id: number | null;
+    name: string | null;
+    email: string | null;
+    logado: boolean;
+  };
+  setUserLogado: Dispatch<SetStateAction<UserLogado>>;
 }
 interface UserLogado {
-  id: number;
-  name: string;
-  email: string;
+  id: number | null;
+  name: string | null;
+  email: string | null;
+  logado: boolean;
 }
 
 export const userLogadoContext = createContext<IUserLogado>({
-  userLogado: null,
+  userLogado: {
+    id: null,
+    name: null,
+    email: null,
+    logado: false,
+  },
 
   setUserLogado: () => undefined,
 });
@@ -31,7 +38,12 @@ interface IUserLogadoContext {
 }
 
 export const UserLogadoProvider = ({ children }: IUserLogadoContext) => {
-  const [userLogado, setUserLogado] = useState<UserLogado | null>(null);
+  const [userLogado, setUserLogado] = useState<UserLogado>({
+    id: null,
+    name: null,
+    email: null,
+    logado: false,
+  });
 
   return (
     <userLogadoContext.Provider

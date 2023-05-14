@@ -8,12 +8,20 @@ import { userLogadoContext } from "./contexts/UserContext";
 
 function App() {
   const api = AuthApi();
-  const { userLogado, setUserLogado } = useContext(userLogadoContext);
+  const { setUserLogado } = useContext(userLogadoContext);
   useEffect(() => {
-    api.userInfo().then((response) => {
-      console.log(response.data);
-      setUserLogado(response.data);
-    });
+    const getUserInfo = async () => {
+      await api
+        .userInfo()
+        .then((response) => {
+          setUserLogado(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          setUserLogado({ id: null, name: null, email: null, logado: false });
+        });
+    };
+    getUserInfo();
   }, []);
 
   return (

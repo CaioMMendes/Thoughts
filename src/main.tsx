@@ -8,6 +8,7 @@ import Register from "./pages/Register.tsx";
 import Login from "./pages/Login.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import Page404 from "./pages/Page404.tsx";
+import Thoughts from "./pages/Thoughts.tsx";
 import { ToastContainer } from "react-toastify";
 import { UserLogadoProvider } from "./contexts/UserContext.tsx";
 
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/thoughts",
+        element: <Thoughts />,
       },
     ],
   },

@@ -4,9 +4,12 @@ import { userLogadoContext } from "../contexts/UserContext";
 import Cookies from "js-cookie";
 import { AuthApi } from "../hooks/AuthApi";
 import { toastSucess } from "../components/ToastMessage";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const api = AuthApi();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { userLogado, setUserLogado } = useContext(userLogadoContext);
   const handleSessionCookie = async () => {
     try {
@@ -14,12 +17,16 @@ const Navbar = () => {
       await api
         .logout()
         .then((response) => {
-          console.log(response.data);
           toastSucess("Deslogado com sucesso");
         })
         .catch((err) => {
           console.log(err);
         });
+      setUserLogado({ id: null, name: null, email: null, logado: false });
+      const url = location.pathname;
+      if (url === "/dashboard" || url === "/thoughts") {
+        navigate("/login");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -36,14 +43,14 @@ const Navbar = () => {
               <a href="/">Pensamentos</a>
             </li>
             <li className="hover:text-primary-color duration-500">
-              {userLogado !== null ? (
+              {userLogado.email !== null ? (
                 <a href="/dashboard">Dashboard</a>
               ) : (
                 <a href="/login">Login</a>
               )}
             </li>
             <li className="hover:text-primary-color duration-500">
-              {userLogado !== null ? (
+              {userLogado.email !== null ? (
                 <span className="cursor-pointer" onClick={handleSessionCookie}>
                   Logout
                 </span>

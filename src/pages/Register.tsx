@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthApi } from "../hooks/AuthApi";
 
 const Register = () => {
-  const { userLogado, setUserLogado } = useContext(userLogadoContext);
+  // const { userLogado, setUserLogado } = useContext(userLogadoContext);
 
   const api = AuthApi();
   const navigate = useNavigate();
@@ -102,7 +102,6 @@ const Register = () => {
   });
   const createUser = async (data: any) => {
     try {
-      console.log(data);
       await api
         .register(data.name, data.email, data.password)
         .then((response) => {
@@ -126,7 +125,7 @@ const Register = () => {
   const handdleShowConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
-  console.log(userLogado);
+
   return (
     <main className="flex justify-center items-center pt-4 pb-8 ">
       <form onSubmit={handleSubmit(createUser)} className="">

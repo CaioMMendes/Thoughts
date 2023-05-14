@@ -36,7 +36,6 @@ export const AuthApi = () => ({
     return response;
   },
   register: async (name: string, email: string, password: string) => {
-    console.log("name", name, email, password);
     const response = await api.post("/register", {
       name: name,
       email: email,
@@ -46,6 +45,32 @@ export const AuthApi = () => ({
   },
   userInfo: async () => {
     const response = await api.post("/userInfo");
+    return response;
+  },
+  createThought: async (title: string) => {
+    const response = await api.post("/createThought", {
+      title,
+    });
+    return response;
+  },
+  dashboardThoughts: async () => {
+    const response = await api.get("/dashboardThoughts");
+    return response;
+  },
+  deleteThought: async (id: number) => {
+    const response = await api.post("/deleteThought", { id });
+    return response;
+  },
+  updateThought: async (id: number, title: string) => {
+    const response = await api.post("/updateThought", { id, title });
+    return response;
+  },
+  getThoughts: async () => {
+    const response = await api.get("/getThoughts");
+    return response;
+  },
+  searchThoughts: async (search: string) => {
+    const response = await api.post("/searchThoughts", { search });
     return response;
   },
 });
