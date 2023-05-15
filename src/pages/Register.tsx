@@ -55,11 +55,16 @@ const Register = () => {
         //   "dasdasd"
         // )
         .nonempty("Digite uma senha de pelo menos 8 dígitos")
-        // .min(8, "A senha precisa ter 8 dígitos")
+        .min(8, "A senha precisa ter 8 dígitos")
         .max(32, "A senha deve ter menos de 32 dígitos")
         .refine((password) => {
-          return !password.includes(" ");
-          if (/\p{Emoji}/gu.test(password) || password.includes(" ")) {
+          // if (/\p{Emoji}/gu.test(password) || password.includes(" ")) {
+          if (
+            /[\p{Extended_Pictographic}\u{1F3FB}-\u{1F3FF}\u{1F9B0}-\u{1F9B3}]/gu.test(
+              password
+            ) ||
+            password.includes(" ")
+          ) {
             return false;
           }
           return password;
@@ -67,14 +72,17 @@ const Register = () => {
       passwordConfirm: z
         .string()
         .nonempty("Digite uma senha de pelo menos 8 dígitos")
-        // .min(8, "A senha precisa ter 8 dígitos")
+        .min(8, "A senha precisa ter 8 dígitos")
         .max(32, "A senha deve ter menos de 32 dígitos")
         .refine((passwordConfirm) => {
-          //todo fazer isso aqui
-          // const regex = /^[A-Za-z\d@$!%*#?&]$/gu;
-          // if (regex.test(passwordConfirm) || passwordConfirm.includes(" ")) {
-          //   return false;
-          // }
+          if (
+            /[\p{Extended_Pictographic}\u{1F3FB}-\u{1F3FF}\u{1F9B0}-\u{1F9B3}]/gu.test(
+              passwordConfirm
+            ) ||
+            passwordConfirm.includes(" ")
+          ) {
+            return false;
+          }
           return passwordConfirm;
         }, "Formato de senha inválido"),
     })
