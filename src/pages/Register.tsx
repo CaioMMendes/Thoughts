@@ -1,12 +1,10 @@
-import { Link } from "react-router-dom";
-import { useState, useContext, useEffect } from "react";
-import { userLogadoContext } from "../contexts/UserContext";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
-import { toastSucess, toastError } from "../components/ToastMessage";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
+import { z } from "zod";
+import { toastError, toastSucess } from "../components/ToastMessage";
 import { AuthApi } from "../hooks/AuthApi";
 
 const Register = () => {
@@ -108,7 +106,7 @@ const Register = () => {
   } = useForm<CreateUserFormData>({
     resolver: zodResolver(createUserFormSchema),
   });
-  const createUser = async (data: any) => {
+  const createUser = async (data: CreateUserFormData) => {
     try {
       await api
         .register(data.name, data.email, data.password)

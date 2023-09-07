@@ -1,9 +1,8 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import { AuthApi } from "../hooks/AuthApi";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
+import { AuthApi } from "../hooks/AuthApi";
 
 interface IThought {
   id: number;
@@ -41,6 +40,7 @@ const Home = () => {
   };
   useEffect(() => {
     handleAllThoughts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const {
     register,
@@ -50,7 +50,7 @@ const Home = () => {
   } = useForm<CreateUserFormData>({
     resolver: zodResolver(createUserFormSchema),
   });
-  const handleSearch = async (data: any) => {
+  const handleSearch = async (data: CreateUserFormData) => {
     try {
       await api
         .searchThoughts(data.search)
@@ -88,7 +88,7 @@ const Home = () => {
           {errors.search && (
             <span className="text-red-500">{errors.search.message}</span>
           )}
-          <button type="submit" className="btn w-32" onClick={handleSearch}>
+          <button type="submit" className="btn w-32">
             Buscar
           </button>
         </form>
@@ -113,7 +113,7 @@ const Home = () => {
 
       <div className="flex gap-5 flex-col my-6">
         {allThoughts
-          ? allThoughts.map((thought: any, index: number) => {
+          ? allThoughts.map((thought: IThought, index: number) => {
               return (
                 <div
                   key={index}

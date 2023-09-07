@@ -39,7 +39,7 @@ const Login = () => {
   } = useForm<CreateUserFormData>({
     resolver: zodResolver(createUserFormSchema),
   });
-  const loginUser = async (data: any) => {
+  const loginUser = async (data: CreateUserFormData) => {
     try {
       await api
         .login(data.email, data.password)
