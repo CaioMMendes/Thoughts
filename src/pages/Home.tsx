@@ -3,6 +3,7 @@ import { AuthApi } from "../hooks/AuthApi";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 
 interface IThought {
   id: number;
@@ -80,7 +81,7 @@ const Home = () => {
         >
           <input
             type="text"
-            className="w-full border border-primary-color px-3 "
+            className="w-full border border-primary-color px-3 rounded-md outline-none focus:ring-1 focus:ring-primary-color"
             placeholder="Está em busca de algo?"
             {...register("search")}
           />

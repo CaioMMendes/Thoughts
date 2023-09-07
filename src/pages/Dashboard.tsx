@@ -16,7 +16,6 @@ const Dashboard = () => {
   const [isDisabledInput, setIsDisabledInput] = useState<number[]>([]);
   // const [inputThoughtTitle, setInputThoughtTitle] = useState<number[]>([]);
   const [thoughts, setThoughts] = useState<IThought[] | null>(null);
-  console.log("renderizou dashboard");
   const getUserInfo = async () => {
     try {
       const response = await api.userInfo();
@@ -136,10 +135,9 @@ const Dashboard = () => {
                 <input
                   type="text"
                   className={`
-                    ${
-                      isDisabledInput.includes(thought.id)
-                        ? "bg-zinc-700 border border-primary-color outline-none"
-                        : ""
+                    ${isDisabledInput.includes(thought.id)
+                      ? "bg-zinc-700 border border-primary-color outline-none"
+                      : ""
                     } text-xl px-3 w-full bg-[#242424]`}
                   disabled={isDisabledInput.includes(thought.id) ? false : true}
                   value={thought.title}

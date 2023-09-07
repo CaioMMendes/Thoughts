@@ -20,3 +20,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 - [Typescript](https://www.typescriptlang.org/)
 - [Sequelize](https://sequelize.org/)
 - [Mysql](https://www.mysql.com/)
+
+## 💻 Example
+
+![Loading Example...](link do gif)

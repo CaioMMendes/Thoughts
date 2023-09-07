@@ -1,4 +1,4 @@
-import logo from "../assets/toughts_logo.png";
+import logo from "/assets/thoughts_logo.png";
 import { useContext } from "react";
 import { userLogadoContext } from "../contexts/UserContext";
 import Cookies from "js-cookie";

@@ -149,7 +149,7 @@ const Register = () => {
                 placeholder="Digite o seu nome"
                 className={`${
                   errors.name && "border-red-500"
-                } w-full px-2 h-8 outline-none rounded border text-base border-primary-color items-center`}
+                } w-full px-2 h-8 outline-none rounded border border-primary-color text-base focus:ring-1 focus:ring-primary-color    items-center`} /* border-primary-color */
                 {...register("name")}
               />
             </label>
@@ -165,7 +165,7 @@ const Register = () => {
                 placeholder="Digite o seu e-mail"
                 className={`${
                   errors.email && "border-red-500"
-                } w-full px-2 h-8 outline-none rounded border text-base border-primary-color items-center`}
+                } w-full px-2 h-8 outline-none rounded border text-base border-primary-color items-center focus:ring-1 focus:ring-primary-color`}
                 {...register("email")}
               />
             </label>
@@ -183,7 +183,7 @@ const Register = () => {
                   autoComplete="off"
                   className={`${
                     errors.password && "border-red-500"
-                  }  w-full px-2 h-8 outline-none rounded border text-base border-primary-color items-center`}
+                  }  w-full px-2 h-8 outline-none rounded border text-base border-primary-color items-center focus:ring-1 focus:ring-primary-color`}
                   {...register("password")}
                 />
                 <span
@@ -207,7 +207,7 @@ const Register = () => {
                   placeholder="Digite a sua senha"
                   className={`${
                     errors.passwordConfirm && "border-red-500"
-                  }  w-full px-2 h-8 outline-none rounded border text-base border-primary-color items-center`}
+                  }  w-full px-2 h-8 outline-none rounded border text-base border-primary-color items-center focus:ring-1 focus:ring-primary-color`}
                   {...register("passwordConfirm")}
                 />
                 <span

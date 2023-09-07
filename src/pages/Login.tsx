@@ -78,7 +78,7 @@ const Login = () => {
                 placeholder="Digite o seu e-mail"
                 className={`${
                   errors.email && "border-red-500"
-                } w-full px-2 h-8 outline-none rounded border text-base border-primary-color items-center`}
+                } w-full px-2 h-8 outline-none rounded border text-base border-primary-color focus:ring-1 focus:ring-primary-color items-center`}
                 {...register("email")}
               />
             </label>
@@ -95,7 +95,7 @@ const Login = () => {
                   placeholder="Digite a sua senha"
                   className={`${
                     errors.password && "border-red-500"
-                  }  w-full px-2 h-8 outline-none rounded border text-base border-primary-color items-center`}
+                  }  w-full px-2 h-8 outline-none rounded border text-base border-primary-color focus:ring-1 focus:ring-primary-color items-center`}
                   {...register("password")}
                 />
                 <span
