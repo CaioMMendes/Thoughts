@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -11,7 +11,7 @@ const Login = () => {
   const api = AuthApi();
   const { setUserLogado } = useContext(userLogadoContext);
   const [showPassword, setShowPassword] = useState(false);
-
+  const navigate = useNavigate();
   const createUserFormSchema = z.object({
     email: z
       .string()
@@ -50,6 +50,7 @@ const Login = () => {
 
           setUserLogado(response.data);
           toastSucess("Logado com sucesso");
+          navigate("/dashboard");
         })
         .catch((err) => {
           console.log(err);
