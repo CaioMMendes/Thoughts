@@ -82,7 +82,7 @@ const Home = () => {
           <input
             type="text"
             className="w-full border border-primary-color px-3 rounded-md outline-none focus:ring-1 focus:ring-primary-color"
-            placeholder="Está em busca de algo?"
+            placeholder="Digite algo"
             {...register("search")}
           />
           {errors.search && (
