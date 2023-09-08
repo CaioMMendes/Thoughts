@@ -16,7 +16,7 @@ const Navbar = () => {
       Cookies.remove("session");
       await api
         .logout()
-        .then((response) => {
+        .then(() => {
           toastSucess("Deslogado com sucesso");
         })
         .catch((err) => {
