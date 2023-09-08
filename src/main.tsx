@@ -21,23 +21,23 @@ const router = createBrowserRouter([
     errorElement: <Page404 />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <Home />,
       },
       {
-        path: "/register",
+        path: "register",
         element: <Register />,
       },
       {
-        path: "/login",
+        path: "login",
         element: <Login />,
       },
       {
-        path: "/dashboard",
+        path: "dashboard",
         element: <Dashboard />,
       },
       {
-        path: "/thoughts",
+        path: "thoughts",
         element: <Thoughts />,
       },
     ],
