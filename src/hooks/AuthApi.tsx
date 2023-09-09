@@ -12,7 +12,7 @@ interface CustomAxiosRequestConfig extends AxiosRequestConfig {
 const axiosConfig: CustomAxiosRequestConfig = {
   withCredentials: true,
   headers: {
-    // Access-Control-Allow-Credentials:true,
+    "Access-Control-Allow-Credentials": true,
     // "Content-Type": "application/json",
     "Content-Type": "application/json",
   },
@@ -29,13 +29,13 @@ export const AuthApi = () => ({
       {
         email,
         password,
-      },
-      { withCredentials: true }
+      }
+      /* { withCredentials: true } */
     );
     return response;
   },
   logout: async () => {
-    const response = await api.post("/logout", { withCredentials: true });
+    const response = await api.post("/logout" /* { withCredentials: true } */);
 
     return response;
   },
@@ -46,13 +46,15 @@ export const AuthApi = () => ({
         name: name,
         email: email,
         password: password,
-      },
-      { withCredentials: true }
+      }
+      /* { withCredentials: true } */
     );
     return response;
   },
   userInfo: async () => {
-    const response = await api.post("/userInfo", { withCredentials: true });
+    const response = await api.post(
+      "/userInfo" /* { withCredentials: true } */
+    );
     return response;
   },
   createThought: async (title: string) => {
@@ -60,8 +62,8 @@ export const AuthApi = () => ({
       "/createThought",
       {
         title,
-      },
-      { withCredentials: true }
+      }
+      /* { withCredentials: true } */
     );
     return response;
   },
@@ -74,28 +76,30 @@ export const AuthApi = () => ({
   deleteThought: async (id: number) => {
     const response = await api.post(
       "/deleteThought",
-      { id },
-      { withCredentials: true }
+      { id }
+      /* { withCredentials: true } */
     );
     return response;
   },
   updateThought: async (id: number, title: string) => {
     const response = await api.post(
       "/updateThought",
-      { id, title },
-      { withCredentials: true }
+      { id, title }
+      /* { withCredentials: true } */
     );
     return response;
   },
   getThoughts: async () => {
-    const response = await api.get("/getThoughts", { withCredentials: true });
+    const response = await api.get(
+      "/getThoughts" /* { withCredentials: true } */
+    );
     return response;
   },
   searchThoughts: async (search: string) => {
     const response = await api.post(
       "/searchThoughts",
-      { search },
-      { withCredentials: true }
+      { search }
+      /* { withCredentials: true } */
     );
     return response;
   },
