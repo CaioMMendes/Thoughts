@@ -12,8 +12,7 @@ interface CustomAxiosRequestConfig extends AxiosRequestConfig {
 const axiosConfig: CustomAxiosRequestConfig = {
   withCredentials: true,
   headers: {
-    "Access-Control-Allow-Credentials": true,
-    // "Content-Type": "application/json",
+    // "Access-Control-Allow-Credentials": true,
     "Content-Type": "application/json",
   },
   credentials: "include",
