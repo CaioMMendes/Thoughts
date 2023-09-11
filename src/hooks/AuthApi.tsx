@@ -5,17 +5,17 @@ import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 //   INCLUDE = "include",
 // }
 
-interface CustomAxiosRequestConfig extends AxiosRequestConfig {
-  credentials: string;
-}
+// interface CustomAxiosRequestConfig extends AxiosRequestConfig {
+//   credentials: string;
+// }
 
-const axiosConfig: CustomAxiosRequestConfig = {
+const axiosConfig: /* CustomAxiosRequestConfig */ AxiosRequestConfig = {
   withCredentials: true,
-  headers: {
-    // "Access-Control-Allow-Credentials": true,
-    "Content-Type": "application/json",
-  },
-  credentials: "include",
+  // headers: {
+  //   // "Access-Control-Allow-Credentials": true,
+  //   "Content-Type": "application/json",
+  // },
+  // credentials: "include",
   baseURL: import.meta.env.VITE_APIURL,
 };
 
