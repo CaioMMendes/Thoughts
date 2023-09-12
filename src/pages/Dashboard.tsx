@@ -43,7 +43,7 @@ const Dashboard = () => {
       });
   }, []);
 
-  const handleDelete = async (index: number, id: number) => {
+  const handleDelete = async (id: number) => {
     try {
       api
         .deleteThought(id)
@@ -59,6 +59,7 @@ const Dashboard = () => {
     }
   };
   const handleUpdateThought = async (id: number, title: any) => {
+    console.log(title);
     try {
       await api
         .updateThought(id, title)
@@ -177,7 +178,7 @@ const Dashboard = () => {
                       setThoughts((prevArray: any) =>
                         prevArray.filter((_: number, i: number) => i !== index)
                       );
-                      handleDelete(index, thought.id);
+                      handleDelete(thought.id);
                     }}
                   >
                     Excluir
