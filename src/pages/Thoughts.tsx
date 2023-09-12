@@ -15,8 +15,6 @@ const Thoughts = () => {
     ("");
   }, []);
   if (userLogado?.logado === false) {
-    console.log(userLogado);
-
     navigate("/login");
   }
   const createUserFormSchema = z.object({
@@ -48,7 +46,7 @@ const Thoughts = () => {
   } = useForm<CreateUserFormData>({
     resolver: zodResolver(createUserFormSchema),
   });
-  const createThought = async (data: any) => {
+  const createThought = async (data: CreateUserFormData) => {
     api
       .createThought(data.title)
       .then((response) => {

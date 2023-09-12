@@ -19,8 +19,8 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 - [NodeJs](https://nodejs.org/en)
 - [Typescript](https://www.typescriptlang.org/)
 - [Sequelize](https://sequelize.org/)
-- [Mysql](https://www.mysql.com/)
+- [PostgreSQL](https://www.postgresql.org/)
 
-## 💻 Example
+## 💻 O projeto pode ser vizualizado acessando o seguinte link
 
-![Loading Example...](link do gif)
+<https://thoughts-sigma-eight.vercel.app/>

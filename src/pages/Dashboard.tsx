@@ -44,8 +44,6 @@ const Dashboard = () => {
   }, []);
 
   const handleDelete = async (index: number, id: number) => {
-    console.log(index, id);
-
     try {
       api
         .deleteThought(id)
@@ -61,7 +59,6 @@ const Dashboard = () => {
     }
   };
   const handleUpdateThought = async (id: number, title: any) => {
-    console.log(title);
     try {
       await api
         .updateThought(id, title)
@@ -93,7 +90,6 @@ const Dashboard = () => {
         return thought;
       });
       setThoughts(updatedThoughts);
-      console.log(updatedThoughts);
     }
   };
   return (
@@ -135,9 +131,10 @@ const Dashboard = () => {
                 <input
                   type="text"
                   className={`
-                    ${isDisabledInput.includes(thought.id)
-                      ? "bg-zinc-700 border border-primary-color outline-none"
-                      : ""
+                    ${
+                      isDisabledInput.includes(thought.id)
+                        ? "bg-zinc-700 border border-primary-color outline-none"
+                        : ""
                     } text-xl px-3 w-full bg-[#242424]`}
                   disabled={isDisabledInput.includes(thought.id) ? false : true}
                   value={thought.title}
